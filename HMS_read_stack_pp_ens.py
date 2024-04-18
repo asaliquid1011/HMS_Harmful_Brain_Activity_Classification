@@ -99,20 +99,17 @@ if select_col_label =='proba':
 elif select_col_label =='logits':
     col_labels_feat     = col_labels_logits
 fold_type               = config['calc_mode']['fold_type']
+dir_master              = config['calc_mode']['dir_label']
 if fold_type == 'TH':
     if data_type =='ALL':
-        dir_master      = 'master_FOLD_TH_exp962_ALL'
         all_mode        = True
     else:
-        dir_master      = 'master_FOLD_TH_exp963'
         all_mode        = False
     exp_id_fold         = 'exp_id_fold_TH'
 elif fold_type == 'THV2':
     if data_type =='ALL':
-        dir_master      = 'master_FOLD_TH_exp970_ALL'
         all_mode        = True
     else:
-        dir_master      = 'master_FOLD_THV2_exp971'
         all_mode        = False
     exp_id_fold         = 'exp_id_fold_THV2'
 exp_id_spec             = config[exp_id_fold]['spec']

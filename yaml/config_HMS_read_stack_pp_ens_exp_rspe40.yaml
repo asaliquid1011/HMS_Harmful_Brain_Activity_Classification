@@ -10,11 +10,11 @@ calc_mode                       :
     calc_stack                  : True
     calc_pp                     : True
     label_mode                  : 'specified'  #'center' # 'specified'
-
+    dir_label                   : 'master_FOLD_THV2_exp971'
+    
 #THV2 FOLD
 exp_id_fold_THV2      :
         Calc_Fold   : [0,1,2,3] #[0,1,2,3,4]
-
         spec        : [
                         'result_KM_CV_0.2633_oof',
                         'result_KM_CV_0.2698_oof',

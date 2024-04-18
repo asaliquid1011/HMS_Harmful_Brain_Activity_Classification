@@ -10,7 +10,7 @@ calc_mode                       :
     calc_stack                  : True
     calc_pp                     : True
     label_mode                  : 'specified'  #'center' # 'specified'
-
+    dir_label                   : 'master_FOLD_THV2_exp971'
 
 #TH FOLD
 exp_id_fold_TH      :
