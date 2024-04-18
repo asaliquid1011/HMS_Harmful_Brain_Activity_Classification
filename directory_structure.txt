@@ -1,0 +1,14 @@
+.
+./yaml
+./data
+./data/input
+./data/input/hms-harmful-brain-activity-classification
+./data/output
+./logs
+./src
+./src/audio
+./src/models
+./src/postprocess
+./src/preprocess
+./src/trainer
+./src/utils

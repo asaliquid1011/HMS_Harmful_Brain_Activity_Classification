@@ -1,0 +1,17 @@
+services:
+  app:
+    build: .
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    shm_size: '256gb'
+    volumes:
+      - ./:/workspace
+    working_dir: /workspace
+    ports:
+      - "9999:8888"
+    tty: true

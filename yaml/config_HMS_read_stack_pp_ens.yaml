@@ -1,0 +1,344 @@
+EXP_ID                      : 'exp_rspe30_fold_TH_stack30_comb4_pp8_hidden64_layer3_EP200_trial5000_8000_add_kazumax_v2' 
+
+#=calc_mode=#
+calc_mode                       :
+    fold_type                   : 'THV2' #TH'  'THV2'
+    data_type                   : 'Hvote' #'ALL','Hvote'
+    select_id                   : 'label_id' #'label_id','eeg_id'
+    select_col_label            : 'logits'   #'prob','logits'
+    stacking_mode               : 'all_comb' #'all_comb' #'set_comb'
+    calc_stack                  : True
+    calc_pp                     : True
+    label_mode                  : 'specified'  #'center' # 'specified'
+
+
+#TH FOLD
+exp_id_fold_TH      :
+        Calc_Fold   : [0,1,2,3] 
+        spec        : [
+                        'result_KM_CV_0.2639_oof',
+                        'result_KM_CV_0.2704_oof',
+                        'result_KM_CV_0.2777_oof',
+                        ]
+        eeg_wave    : [
+                        'exp453_EEG_WAVE_multi1D_deep1D_cnn2D_Fold_TH_HvoteData_pretrain_exp451',
+                        'result_TH_wavenet_effnetb4_downsample_oof',
+                        'result_TH_wavenet_maxxvits_downsample_oof',
+                        'result_TH_wavenet_maxxvitv2n_downsample_oof',
+                        'result_TH_wavenet_maxxvitv2n_oof',
+                        ]
+        eeg_img     : [
+                        'exp537_EEG_IMG_stft_512_24_16ch_effb0ns_maxxvit_Fold_TH_add_aug_HvoteData_pretrain_exp536',
+                        'exp539_EEG_IMG_stft_512_96_16ch_effb0ns_MLP_Fold_TH_HvoteData_pretrain_exp538',
+                        ]
+        multi       : [
+                        'exp963_MULTI_exp321_451_536_logits_out_Fold_TH_HvoteData_pretrain_exp962',
+                        ]
+        set_comb    : [
+                        [
+                        'none',
+                        ],
+                    ]
+        set_pp      :
+                    num_set : 8
+                    set0    : 
+                        use_spec                : True            
+                        use_eeg_wave            : True            
+                        use_eeg_img             : True
+                        use_multi               : True
+                        use_ens                 : True
+                        use_stacking            : True
+                        add_ave                 : True
+                        add_max                 : True
+                        add_min                 : True
+                        add_std                 : True
+                        add_count               : True
+                        add_delta               : True
+                    set1    : 
+                        use_spec                : True            
+                        use_eeg_wave            : True            
+                        use_eeg_img             : True
+                        use_multi               : True
+                        use_ens                 : True
+                        use_stacking            : False
+                        add_ave                 : True
+                        add_max                 : False
+                        add_min                 : False
+                        add_std                 : True
+                        add_count               : True
+                        add_delta               : True
+                    set2    : 
+                        use_spec                : True            
+                        use_eeg_wave            : True            
+                        use_eeg_img             : True
+                        use_multi               : True
+                        use_ens                 : True
+                        use_stacking            : False
+                        add_ave                 : True
+                        add_max                 : False
+                        add_min                 : False
+                        add_std                 : True
+                        add_count               : False
+                        add_delta               : False
+                    set3    : 
+                        use_spec                : False           
+                        use_eeg_wave            : True            
+                        use_eeg_img             : True
+                        use_multi               : False
+                        use_ens                 : True
+                        use_stacking            : False
+                        add_ave                 : True
+                        add_max                 : False
+                        add_min                 : False
+                        add_std                 : True
+                        add_count               : False
+                        add_delta               : False
+                    set4    : 
+                        use_spec                : True            
+                        use_eeg_wave            : True            
+                        use_eeg_img             : True
+                        use_multi               : False
+                        use_ens                 : False
+                        use_stacking            : False
+                        add_ave                 : True
+                        add_max                 : True
+                        add_min                 : True
+                        add_std                 : True
+                        add_count               : True
+                        add_delta               : True
+                    set5    : 
+                        use_spec                : True            
+                        use_eeg_wave            : True            
+                        use_eeg_img             : True
+                        use_multi               : True
+                        use_ens                 : True
+                        use_stacking            : True
+                        add_ave                 : True
+                        add_max                 : False
+                        add_min                 : False
+                        add_std                 : False
+                        add_count               : False
+                        add_delta               : False
+                    set6    : 
+                        use_spec                : True            
+                        use_eeg_wave            : True            
+                        use_eeg_img             : True
+                        use_multi               : True
+                        use_ens                 : False
+                        use_stacking            : False
+                        add_ave                 : True
+                        add_max                 : True
+                        add_min                 : True
+                        add_std                 : False
+                        add_count               : True
+                        add_delta               : False
+                    set7    :
+                        use_spec                : False           
+                        use_eeg_wave            : False           
+                        use_eeg_img             : False
+                        use_multi               : False
+                        use_ens                 : True
+                        use_stacking            : True
+                        add_ave                 : True
+                        add_max                 : True
+                        add_min                 : True
+                        add_std                 : True
+                        add_count               : True
+                        add_delta               : True
+
+#THV2 FOLD
+exp_id_fold_THV2      :
+        Calc_Fold   : [0,1,2,3] #[0,1,2,3,4]
+
+        #=====exp_rspe40_fold_THV2_stack24_comb4_pp8_hidden64_layer3_EP200_trial5000_8000
+        #THV2 FOLD stage2
+        spec        : [
+                        'result_KM_CV_0.2633_oof',
+                        'result_KM_CV_0.2698_oof',
+                        'result_KM_CV_0.2729_oof',
+                        ]
+        eeg_wave    : [
+                        'exp461_EEG_WAVE_multi1D_deep1D_cnn2D_Fold_THv2_HvoteData_pretrain_exp460',
+                        'result_TH_wavenet_maxxvits_downsample_foldV2_oof',
+                        'result_TH_wavenet_effnetb4_downsample_foldV2_oof',
+                        'result_TH_wavenet_maxxvitv2n_downsample_foldV2_oof',
+                        ]
+        eeg_img     : [
+                        'exp341_SPEC_effb0ns_maxxvit_Fold_THv2_HvoteData_pretrain_exp340',
+                        'exp551_EEG_IMG_stft_512_24_16ch_effb0ns_maxxvit_Fold_THv2_add_aug_HvoteData_pretrain_exp550',
+                        ]
+        multi       : [
+                        'exp971_MULTI_exp340_460_550_logits_out_Fold_THv2_HvoteData_pretrain_exp970',
+                        ]
+        set_comb    : [
+                        [
+                        'exp323_SPEC_effb0ns_maxxvit_Fold_TH_HvoteData_pretrain_exp321',
+                        'result_TH_wavenet_maxxvitv2n',
+                        'exp537_EEG_IMG_stft_512_24_16ch_effb0ns_maxxvit_Fold_TH_add_aug_HvoteData_pretrain_exp536',
+                        ],
+                    ]
+        set_pp      :
+                    num_set : 8
+                    set0    : 
+                        use_spec                : True            
+                        use_eeg_wave            : True            
+                        use_eeg_img             : True
+                        use_multi               : True
+                        use_ens                 : True
+                        use_stacking            : True
+                        add_ave                 : True
+                        add_max                 : True
+                        add_min                 : True
+                        add_std                 : True
+                        add_count               : True
+                        add_delta               : True
+                    set1    : 
+                        use_spec                : True            
+                        use_eeg_wave            : True            
+                        use_eeg_img             : True
+                        use_multi               : True
+                        use_ens                 : True
+                        use_stacking            : False
+                        add_ave                 : True
+                        add_max                 : False
+                        add_min                 : False
+                        add_std                 : True
+                        add_count               : True
+                        add_delta               : True
+                    set2    : 
+                        use_spec                : True            
+                        use_eeg_wave            : True            
+                        use_eeg_img             : True
+                        use_multi               : True
+                        use_ens                 : True
+                        use_stacking            : False
+                        add_ave                 : True
+                        add_max                 : False
+                        add_min                 : False
+                        add_std                 : True
+                        add_count               : False
+                        add_delta               : False
+                    set3    : 
+                        use_spec                : False           
+                        use_eeg_wave            : True            
+                        use_eeg_img             : True
+                        use_multi               : False
+                        use_ens                 : True
+                        use_stacking            : False
+                        add_ave                 : True
+                        add_max                 : False
+                        add_min                 : False
+                        add_std                 : True
+                        add_count               : False
+                        add_delta               : False
+                    set4    : 
+                        use_spec                : True            
+                        use_eeg_wave            : True            
+                        use_eeg_img             : True
+                        use_multi               : False
+                        use_ens                 : False
+                        use_stacking            : False
+                        add_ave                 : True
+                        add_max                 : True
+                        add_min                 : True
+                        add_std                 : True
+                        add_count               : True
+                        add_delta               : True
+                    set5    : 
+                        use_spec                : True            
+                        use_eeg_wave            : True            
+                        use_eeg_img             : True
+                        use_multi               : True
+                        use_ens                 : True
+                        use_stacking            : True
+                        add_ave                 : True
+                        add_max                 : False
+                        add_min                 : False
+                        add_std                 : False
+                        add_count               : False
+                        add_delta               : False
+                    set6    : 
+                        use_spec                : True            
+                        use_eeg_wave            : True            
+                        use_eeg_img             : True
+                        use_multi               : True
+                        use_ens                 : False
+                        use_stacking            : False
+                        add_ave                 : True
+                        add_max                 : True
+                        add_min                 : True
+                        add_std                 : False
+                        add_count               : True
+                        add_delta               : False
+                    set7    :
+                        use_spec                : False           
+                        use_eeg_wave            : False           
+                        use_eeg_img             : False
+                        use_multi               : False
+                        use_ens                 : True
+                        use_stacking            : True
+                        add_ave                 : True
+                        add_max                 : True
+                        add_min                 : True
+                        add_std                 : True
+                        add_count               : True
+                        add_delta               : True
+
+#=dataset=#
+dataset:
+    col_labels              : ['seizure_vote','lpd_vote','gpd_vote','lrda_vote','grda_vote','other_vote']   #=FIX=# 
+
+#=model=#
+model:
+    col_labels              : ['seizure_vote','lpd_vote','gpd_vote','lrda_vote','grda_vote','other_vote']   #=FIX=# 
+    PP:
+        n_classes           : 6
+        hidden_mlp          : 64
+        num_layers          : 3
+    Stacking:
+        n_classes           : 6
+        hidden_mlp          : 64
+        num_layers          : 3
+#=optuna=#
+optuna:
+    n_trials_spec           : 1000
+    n_trials_wave           : 1000
+    n_trials_img            : 1000
+    n_trials_multi          : 1000
+    n_trials_stack          : 1000
+    n_trials_ens1           : 5000
+    use_feat_ens2           : ['spec','wave','img','multi','stack','pp'] # ['wave','multi','stack','pp']
+    n_trials_ens2           : 8000
+
+#=train=#
+train                       :
+    SEED                    : 411
+    EPOCHS                  : 200
+    BATCH_SIZE_Tr           : 64
+    BATCH_SIZE_Val          : 64
+    NUM_WORKERS             : 0
+    LEARNING_RATE           : 0.0002
+    WEIGHT_DECAY            : 0.00001
+
+#=path=#
+path                :
+    Env             : "local"
+    input_dir       : "./data/input"
+    data_dir        : "./data/input/hms-harmful-brain-activity-classification"
+    output_dir      : "./data/output"
+    LOGGER_dir      : "./logs"
+    src_dir         : "./src"
+    load_model_dir  : "./data/output/model"
+
+path_kaggle         :
+    Env             : "kaggle"
+    input_dir       : "/kaggle/input"
+    data_dir        : "/kaggle/input/birdclef-2023"
+    wav_train_dir   : "/kaggle/input/birdclef-2023/train_audio/"
+    npy_train_dir   : "None"
+    output_dir      : "./output"
+    LOGGER_dir      : "./logs"
+    src_dir         : "/kaggle/input/bird4-inference-code-v2/src"
+    load_model_dir  : "/kaggle/input/bird4-inference-model"
+    add_data_dir    : "/kaggle/input/bird4-inference-code-v2"
+
