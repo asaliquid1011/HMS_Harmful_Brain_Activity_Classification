@@ -7,6 +7,10 @@ logs/*
 #files
 *__pycache__*
 *.pt
+*.pdf
+*.parquet
+*.npy
+*.csv
 
 # Except for the specific files
 !data/input/hms-harmful-brain-activity-classification/folds1.csv
