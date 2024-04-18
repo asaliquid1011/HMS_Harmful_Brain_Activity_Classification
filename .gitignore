@@ -3,14 +3,19 @@
 data/input/*
 data/output/*
 logs/*
+# Except for the .gitkeep files
+!data/input/.gitkeep
+!data/output/.gitkeep
+!logs/.gitkeep
 
 #files
 *__pycache__*
 *.pt
 
-# Except for the .gitkeep files
-!data/input/.gitkeep
-!data/output/.gitkeep
-!logs/.gitkeep
+# Ignore all files in specific subdirectories, but keep the directories
+!data/input/
+data/input/hms-harmful-brain-activity-classification/*
+
+# Except for the specific files
 !data/input/hms-harmful-brain-activity-classification/folds1.csv
 !data/input/hms-harmful-brain-activity-classification/folds2.csv
