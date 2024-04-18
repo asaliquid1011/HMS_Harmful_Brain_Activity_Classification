@@ -12,3 +12,5 @@ logs/*
 !data/input/.gitkeep
 !data/output/.gitkeep
 !logs/.gitkeep
+!data/input/hms-harmful-brain-activity-classification/folds1.csv
+!data/input/hms-harmful-brain-activity-classification/folds2.csv
