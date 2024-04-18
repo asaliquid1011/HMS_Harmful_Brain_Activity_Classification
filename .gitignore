@@ -6,3 +6,8 @@ logs
 #files
 *__pycache__*
 *.pt
+
+
+# Except for the .gitkeep files
+!data/.gitkeep
+!logs/.gitkeep
