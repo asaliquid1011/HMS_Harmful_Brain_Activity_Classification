@@ -1,13 +1,14 @@
 
 #dirs
-data/*
-logs
+data/input/*
+data/output/*
+logs/*
 
 #files
 *__pycache__*
 *.pt
 
-
 # Except for the .gitkeep files
-!data/.gitkeep
+!data/input/.gitkeep
+!data/output/.gitkeep
 !logs/.gitkeep
