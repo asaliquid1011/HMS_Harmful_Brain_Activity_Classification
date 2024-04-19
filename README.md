@@ -39,12 +39,17 @@ cd data/input/hms-harmful-brain-activity-classification/
 kaggle competitions download -c hms-harmful-brain-activity-classification
 ```
 
-## MODEL BUILD train models(UEMU's part).
+## MODEL BUILD_train models(UEMU's part).
+1)command to run each build is below \
 ```
-python ./train_SED_bird3.py --config <configfilename>
+python3 ./HMS_train_v2.py --config <configfilename>
 ```
 
-## MODEL BUILD ensemble models(UEMU&kazumax&TH's part).
+## MODEL BUILD_ensemble models(UEMU&kazumax&TH's part).
+1)command to run each build is below \
+```
+python3 ./HMS_read_stack_pp_ens.py --config <configfilename>
+```
 
-2) prediction
-python ./inference_SED_bird3.py --config <configfilename> --num-workers 4 --batch-size 32 --coeff-thresh 1.0 --mode-ens Average
+## Inference
+see [Inference notebook](https://www.kaggle.com/code/asaliquid1011/hms-team-inference-ktmud)
