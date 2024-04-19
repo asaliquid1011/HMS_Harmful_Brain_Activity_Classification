@@ -1,5 +1,4 @@
-Below you can find a outline of how to reproduce my solution for the <BIRDCLEF2022> competition.
-If you run into any trouble with the setup/code or have any questions please contact me at <jananesenoodleudon@gmail.com>
+5th place solution(UEMU's part) in [kaggle HMS competiton(https://www.kaggle.com/competitions/hms-harmful-brain-activity-classification)].
 
 # ARCHIVE CONTENTS
 train_code                   : code for train 
