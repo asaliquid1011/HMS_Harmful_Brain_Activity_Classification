@@ -1,0 +1,371 @@
+EXP_ID              : 'exp962_MULTI_exp321_451_536_logits_out_Fold_TH_ALLData'
+
+#=calc_mode=#
+calc_mode                           :
+    #= Train/Preds =#
+    Debug                           : False                 
+    num_Debug                       : 5                     
+    #= Split =#
+    NFOLDS                          : 4         
+    Calc_Fold                       : [0,1,2,3]
+    Split_Mode                      : 'TH_folds1'          
+    #= Select Data =#
+    calc_stage                      : 'stage1' #'stage2
+    #= select1_vote =#
+    thresh_total_vote               : 8                    
+    #= Data_select =#
+    eeg_nan_ratio_thresh_train      : 0.5                  
+    #= Label smoothing =#
+    label_smoothing_ver             : "ver_2" 
+    label_smoothing_n_evaluator     : 3
+    label_smoothing_k               : 10
+    label_smoothing_epsilon         : 0.05
+
+#=dataset=#
+dataset:
+    input_type                  : 'ALL'       #'EEG_WAVE' or 'EEG_IMG' or 'SPEC' or 'ALL'
+    data_read_mode              : 'save'           #'save' or 'load'
+    select_data_epoch           : True             
+    select_data                 : 'patient_id_eeg_id'  
+    col_labels                  : ['seizure_vote','lpd_vote','gpd_vote','lrda_vote','grda_vote','other_vote'] 
+    #=SPEC=#
+    SPEC                        :
+        in_chans_spec           : 4                 
+        in_chans_spec_2         : 1                 
+        out_chans_spec          : 6                 
+        sr_spec                 : 0.5               
+        img_size_spec           : [-1,-1]           
+        augmentation            :                   
+            prob                    : 0.5           
+            stop_aug_epoch          : 999999        
+            #pretrain
+            prob_pretrain           : 0.5          
+            stop_aug_epoch_pretrain : 999999        
+            #
+            aug_type            : 'time_freq_drop_HorizontalFlip' 
+            #time_freq_drop
+            time_drop_width     : 32                
+            time_stripes_num    : 2                
+            freq_drop_width     : 4                 
+            freq_stripes_num    : 2               
+            #other
+            random_crop         : True              
+            random_channel      : 'random_in_range' 
+            random_channel_range: [[0,1], [2,3]]    
+        mixup                   :
+            prob                : 0.5               
+            alpha               : 1.0               
+            stop_mixup_epoch    : 999999            
+            #pretrain
+            prob_pretrain       : 0.5              
+            alpha_pretrain      : 1.0              
+            stop_mixup_epoch_pretrain: 999999      
+        time_cutmix             :
+            prob                : 0.25            
+            alpha               : 1.0             
+            stop_cutmix_epoch   : 999999           
+            #pretrain
+            prob_pretrain       : 0.25            
+            alpha_pretrain      : 1.0             
+            stop_mixup_epoch_pretrain: 999999     
+    #=EEG=#
+    EEG                         :
+        dataset_mode            : 'calc'        #'load','calc','pass','save'
+        wave_select             : 'delta'       
+        wave_select_wave        : 'delta'      
+        wave_select_img         : 'delta'      
+        in_chans_eeg_wave       : 16               
+        in_chans_eeg_img        : 16               
+        out_chans_eeg           : 6               
+        sr_eeg_org              : 200           
+        sr_eeg_resample         : 200           
+        select_time2_wave       :
+            calc_select_time2_wave : True           
+            use_time_ave_wave      : True
+            weights_time_wave      : [0.05,0.2,0.5,0.2,0.05]             
+        augmentation            : 
+            prob                    : 0.5           
+            stop_aug_epoch          : 999999        
+            #pretrain
+            prob_pretrain           : 0.5          
+            stop_aug_epoch_pretrain : 999999       
+            #
+            aug_type            : None              
+            time_drop_width     : 1000              
+            time_stripes_num    : 3                 
+            #other
+            random_crop         : True              
+            random_channel      : 'random_in_range_flip_right_left' 
+            random_channel_range: [[0,1,2,3], [4,5,6,7], [8,9,10,11], [12,13,14,15]]  
+            wave_inverse        : True             
+        mixup                   :
+            prob                : -1               
+            alpha               : 0.5              
+            stop_mixup_epoch    : 999999          
+            #pretrain
+            prob_pretrain       : -1              
+            alpha_pretrain      : 0.5             
+            stop_mixup_epoch_pretrain: 999999     
+        time_cutmix             :
+            prob                : 0.5             
+            alpha               : 1.0            
+            stop_cutmix_epoch   : 999999         
+            mode_start0         : False         
+            #pretrain
+            prob_pretrain       : 0.5            
+            alpha_pretrain      : 1.0             
+            stop_mixup_epoch_pretrain: 999999     
+    #=EEG_IMG=#
+    EEG_IMG                     :
+        dataset_mode            : 'save'            #'load','calc','pass','save'
+        dataset_load_EXP_ID     : 'None'
+        img_select              : 'img1'            
+        add_eeg_img_feat        : 'none'           
+        img_size                : [-1,-1]          
+        select_time2_img        :
+            calc_select_time2_img: True       
+            use_time_ave_img    :  True
+            weights_time_img    : [0.05,0.2,0.5,0.2,0.05]   
+        augmentation            : 
+            prob                    : 0.5          
+            stop_aug_epoch          : 999999      
+            #pretrain
+            prob_pretrain           : 0.5         
+            stop_aug_epoch_pretrain : 999999      
+            #
+            aug_type            : 'time_freq_drop_HorizontalFlip' 
+            #time_freq_drop
+            time_drop_width     : 6                
+            time_stripes_num    : 2               
+            freq_drop_width     : 1              
+            freq_stripes_num    : 0              
+            #other
+            random_crop         : True              
+            random_channel      : 'random_in_range_flip_right_left'          
+            random_channel_range: [[0,1,2,3], [4,5,6,7], [8,9,10,11], [12,13,14,15]] 
+        IMG1_stft               : 
+            calc_img1_stft      : True            
+            N_fft_eeg           : 512             
+            hop_eeg             : 24             
+            max_freq            : 40            
+            max                 : 7               
+            min                 : -6.5           
+            clip_coeff          : 1               
+        mixup                   :
+            prob                : 0.5 
+            alpha               : 1.0            
+            stop_mixup_epoch    : 999999        
+            #pretrain
+            prob_pretrain       : 0.5             
+            alpha_pretrain      : 1.0            
+            stop_mixup_epoch_pretrain: 999999   
+        time_cutmix             :
+            prob                : 0.25 
+            alpha               : 1.0            
+            stop_cutmix_epoch   : 999999         
+            #pretrain
+            prob_pretrain       : 0.25             
+            alpha_pretrain      : 1.0             
+            stop_mixup_epoch_pretrain: 999999     
+    #=ALL=#
+    ALL                             : 
+        augmentation                : 
+            prob                    : 0.5             
+            stop_aug_epoch          : 9999            
+            #pretrain
+            prob_pretrain           : 0.5             
+            stop_aug_epoch_pretrain : 999999         
+        mixup                       :
+            prob                    : 0.5 
+            alpha                   : 1.0       
+            stop_mixup_epoch        : 9999             
+            #pretrain
+            prob_pretrain           : 0.5              
+            alpha_pretrain          : 1.0               
+            stop_mixup_epoch_pretrain: 9999             
+        time_cutmix                 :
+            prob                    : 0.25  
+            alpha                   : 1.0              
+            stop_cutmix_epoch       : 9999            
+            #pretrain
+            prob_pretrain           : 0.25              
+            alpha_pretrain          : 1.0               
+            stop_mixup_epoch_pretrain: 9999             
+#=model=#
+model                                       :
+    model_type                              : 'MULTI'           #'CNN' or'WAVE_CNN' or'MULTI'
+    #===SPEC===#
+    CNN_SPEC                                :
+        #===setting===#
+        ch_mode                             : "1ch"              
+        feature_extract                     : None                
+        backbone_name_cnn                   : 'tf_efficientnet_b0_ns'
+        decoder                             : 'pass'                
+        decoder_outclass                    : 16 #6                
+        ch_head                             : "cnn2d"              
+        #===decoder===#
+        none_decoder                        : 
+        pooling_mlp                         :
+            Global_pooling                  : 'max_ave'           
+            hidden_mlp                      : 512                
+            dropout_mlp                     : 0.0                 
+        #===channel head===#
+        cnn2d_head_ch                       :
+            backbone_name_head_ch           : 'maxxvitv2_nano_rw_256'        
+            mode_img_pooling                : "avg"              
+            hidden_cnn2d_head_ch            : 512                 
+            dropout_cnn2d_head_ch           : 0.0                
+    #===EEG_IMG===#
+    CNN_EEG                                 :
+        #===setting===#
+        ch_mode                             : "1ch"              
+        feature_extract                     : None                
+        backbone_name_cnn                   : 'tf_efficientnet_b0_ns'        
+        decoder                             : 'pass'  
+        decoder_outclass                    : 6                  
+        ch_head                             : "cnn2d" 
+        #===decoder===#
+        none_decoder                        : 
+        pooling_mlp                         :
+            Global_pooling                  : 'ave'          
+            hidden_mlp                      : 256                 
+            dropout_mlp                     : 0.0                 
+        #===channel head===#
+        mlp_head_ch                         :
+            hidden_mlphead_ch               : 512
+            dropout_mlphead_ch              : 0.0            
+            #=add_feat=# 
+            mode_add_feat                   : False               
+        cnn2d_head_ch                       :
+            backbone_name_head_ch           : 'maxxvitv2_nano_rw_256'       
+            mode_img_pooling                : "avg"              
+            hidden_cnn2d_head_ch            : 512                
+            dropout_cnn2d_head_ch           : 0.0                 
+    #===EEG_WAVE===#　
+    WAVE_EEG_CNN                            :
+        ch_mode                             : "1ch"              
+        #setting
+        feature_extract                     : 'multi_1dcnn' 
+        encoder                             : 'deep_1dcnn'   
+        decoder                             : 'none'              
+        ch_head                             : "cnn2d"            
+        epoch_change_decoder                : 999999             
+        #==feature_extract==
+        multi_1dcnn                         : 
+            multi_channels                  : [4, 4, 4, 4] 
+            multi_kernel_sizes              : [5,9,13, 19] 
+            multi_strides                   : [1,1,1, 1,] 
+            res_depth                       : 3                 
+            se_ratio                        : 1                  
+            res_kernel_size                 : 4                 
+        #==encoder==
+        deep_1dcnn                          : 
+            down_channels                   : [32,64,64] 
+            down_kernel_size                : [3, 3 ,3] 
+            down_stride                     : [2, 2, 2] 
+            res_depth                       : 3            
+            se_ratio                        : 4            
+            res_kernel_size                 : 4              
+        #==decoder==
+        pooling                             : 
+            mode_time_pooling               : "max"              
+            mode_ch_pooling                 : "off"              
+        cnn2d_head_ch                       :
+            backbone_name_head_ch           : 'maxxvitv2_nano_rw_256' 
+            mode_img_pooling                : "avg"                 
+            hidden_cnn2d_head_ch            : 64                 
+            dropout_cnn2d_head_ch           : 0.0                 
+    #===MULTI===#
+    MULTI                                   :
+        #==setteing==#
+        calc_spec                           : True                 
+        calc_eeg_wave                       : True                 
+        calc_eeg_img                        : True                
+        mode_load_multi_model               : True               
+        output_type                         : 'logits_output'    
+        output_chans                        : 6                
+        multi_output                        : False
+        multi_output_loss_weight            : [1,0.33,0.33,0.33]
+        load_exp_id                         :
+            exp_id_spec                     : "exp321_SPEC_effb0ns_maxxvit_Fold_TH_ALLDataa"
+            exp_id_eeg_wave                 : "exp451_EEG_WAVE_multi1D_deep1D_cnn2D_Fold_TH_ALLData"
+            exp_id_eeg_img                  : "exp536_EEG_IMG_stft_512_24_16ch_effb0ns_maxxvit_Fold_TH_add_aug_ALLData"
+        #==logits_output==#
+        logits_output                       :
+            head                            : "mlp"               
+            mlp_head                        :
+                in_chans_head               : 18                       
+                hidden_mlphead              : 128                
+                dropout_mlphead             : 0.0               
+                #=multi_output=# 
+                in_chans_head_spec          : 6                 
+                in_chans_head_wave          : 6                 
+                in_chans_head_img           : 6                 
+                hidden_mlphead_spec         : 64                  
+                hidden_mlphead_wave         : 64                
+                hidden_mlphead_img          : 64                  
+                dropout_mlphead_spec        : 0.0               
+                dropout_mlphead_wave        : 0.0                 
+                dropout_mlphead_img         : 0.0                
+                #=add_feat=#         
+                mode_add_feat               : False            
+    LOAD    :
+        exp_id_load                         : "exp962_MULTI_exp321_451_536_logits_out_Fold_TH_ALLData"
+#=train=#
+train:
+    SEED                            : 411        
+    #=Trainer=#
+    EPOCHS                          : -1        
+    EPOCHS_SETTING                  :           
+        SPEC                        : 50         
+        EEG_WAVE                    : 50        
+        EEG_IMG                     : 50          
+        ALL                         : 25         
+        SPEC_pretrain               : 50          
+        EEG_WAVE_pretrain           : 30          
+        EEG_IMG_pretrain            : 50         
+        ALL_pretrain                : 30         
+    BATCH_SIZE_Tr                   : -1         
+    BATCH_SIZE_Val                  : -1         
+    BATCH_SIZE_SETTING              :
+        SPEC                        : 32          
+        EEG_WAVE                    : 16          
+        EEG_IMG                     : 20           
+        ALL                         : 16           
+    DEVICE                          : 'cuda'       
+    #=Loader=#
+    NUM_WORKERS                     : 4            
+    #=optimizer=#
+    OPTIMIZER                       :
+        #SPEC
+        LEARNING_RATE_SPEC              : 0.001             
+        LEARNING_RATE_SPEC_pretrain     : 0.0003         
+        WEIGHT_DECAY_SPEC               : 0.000000000225
+        #EEG_WAVE
+        LEARNING_RATE_EEG_WAVE          : 0.001            
+        LEARNING_RATE_EEG_WAVE_pretrain : 0.0001            
+        WEIGHT_DECAY_EEG_WAVE           : 0.000000001
+        #EEG_IMG
+        LEARNING_RATE_EEG_IMG           : 0.001        
+        LEARNING_RATE_EEG_IMG_pretrain  : 0.0003        
+        WEIGHT_DECAY_EEG_IMG            : 0.000000000225
+        #ALL
+        LEARNING_RATE_ALL               : 0.0005
+        LEARNING_RATE_ALL_pretrain      : 0.0002
+        WEIGHT_DECAY_ALL                : 0.000000000225
+    #=scheduler=#
+    SCHEDULER                       :
+        scheduler_name              : 'cosine_schedule_with_warmup' 
+        num_warmup_steps            : 0                            
+
+#=path=#
+path                :
+    Env             : "local"
+    input_dir       : "./data/input"
+    data_dir        : "./data/input/hms-harmful-brain-activity-classification"
+    output_dir      : "./data/output"
+    LOGGER_dir      : "./logs"
+    src_dir         : "./src"
+    load_model_dir  : "./data/output/model"
+
+

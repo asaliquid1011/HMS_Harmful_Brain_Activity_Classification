@@ -1,4 +1,4 @@
-EXP_ID              : 'exp963_MULTI_exp321_451_536_logits_out_Fold_TH_HvoteData_pretrain_exp962'
+EXP_ID              : 'exp551_EEG_IMG_stft_512_24_16ch_effb0ns_maxxvit_Fold_THv2_add_aug_HvoteData_pretrain_exp550'
 
 #=calc_mode=#
 calc_mode                           :
@@ -8,9 +8,9 @@ calc_mode                           :
     #= Split =#
     NFOLDS                          : 4         
     Calc_Fold                       : [0,1,2,3]
-    Split_Mode                      : 'TH_folds1'          
+    Split_Mode                      : 'TH_folds2'          
     #= Select Data =#
-    calc_stage                      : 'stage1' #'stage2
+    calc_stage                      : 'stage2' #'stage2
     #= select1_vote =#
     thresh_total_vote               : 8                    
     #= Data_select =#
@@ -23,8 +23,8 @@ calc_mode                           :
 
 #=dataset=#
 dataset:
-    input_type                  : 'EEG_WAVE'       #'EEG_WAVE' or 'EEG_IMG' or 'SPEC' or 'ALL'
-    data_read_mode              : 'load'           #'save' or 'load'
+    input_type                  : 'EEG_IMG'       #'EEG_WAVE' or 'EEG_IMG' or 'SPEC' or 'ALL'
+    data_read_mode              : 'save'           #'save' or 'load'
     select_data_epoch           : True             
     select_data                 : 'patient_id_eeg_id'  
     col_labels                  : ['seizure_vote','lpd_vote','gpd_vote','lrda_vote','grda_vote','other_vote'] 
@@ -117,8 +117,8 @@ dataset:
             stop_mixup_epoch_pretrain: 999999     
     #=EEG_IMG=#
     EEG_IMG                     :
-        dataset_mode            : 'pass'            #'load','calc','pass','save'
-        dataset_load_EXP_ID     : 'exp540_EEG_IMG_stft_512_24_16ch_effb0ns_maxxvit_Fold_THv2_add_aug_ALLData'
+        dataset_mode            : 'save'            #'load','calc','pass','save'
+        dataset_load_EXP_ID     : 'None'
         img_select              : 'img1'            
         add_eeg_img_feat        : 'none'           
         img_size                : [-1,-1]          
@@ -193,7 +193,7 @@ dataset:
             stop_mixup_epoch_pretrain: 9999             
 #=model=#
 model                                       :
-    model_type                              : 'WAVE_CNN'           #'CNN' or'WAVE_CNN' or'MULTI'
+    model_type                              : 'LOAD'           #'CNN' or'WAVE_CNN' or'MULTI'
     #===SPEC===#
     CNN_SPEC                                :
         #===setting===#
@@ -310,7 +310,7 @@ model                                       :
                 #=add_feat=#         
                 mode_add_feat               : False            
     LOAD    :
-        exp_id_load                         : "exp970_MULTI_exp340_460_550_logits_out_Fold_THv2_ALLData"
+        exp_id_load                         : "exp550_EEG_IMG_stft_512_24_16ch_effb0ns_maxxvit_Fold_THv2_add_aug_ALLData"
 #=train=#
 train:
     SEED                            : 411        
@@ -318,7 +318,7 @@ train:
     EPOCHS                          : -1        
     EPOCHS_SETTING                  :           
         SPEC                        : 50         
-        EEG_WAVE                    : 10        
+        EEG_WAVE                    : 50        
         EEG_IMG                     : 50          
         ALL                         : 25         
         SPEC_pretrain               : 50          
